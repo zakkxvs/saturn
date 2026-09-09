@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Orbit, LogOut } from "lucide-react";
-import { useAuth } from "../lib/auth";
+import { Orbit, Download } from "lucide-react";
 
 export default function MarketingHeader() {
-  const { user, logout } = useAuth();
   return (
     <header
       data-testid="marketing-header"
@@ -29,49 +27,18 @@ export default function MarketingHeader() {
         <nav className="hidden md:flex items-center gap-8 font-mono-tech text-xs uppercase tracking-[0.18em] text-slate-400">
           <a data-testid="nav-features" href="#features" className="hover:text-amber-400 transition-colors">Features</a>
           <a data-testid="nav-how" href="#how-it-works" className="hover:text-amber-400 transition-colors">How it works</a>
+          <a data-testid="nav-requirements" href="#requirements" className="hover:text-amber-400 transition-colors">Requirements</a>
+          <a data-testid="nav-changelog" href="#changelog" className="hover:text-amber-400 transition-colors">Changelog</a>
           <a data-testid="nav-pricing" href="#pricing" className="hover:text-amber-400 transition-colors">Pricing</a>
           <a data-testid="nav-faq" href="#faq" className="hover:text-amber-400 transition-colors">FAQ</a>
         </nav>
-        <div className="flex items-center gap-2">
-          {user ? (
-            <>
-              <span data-testid="nav-user-email" className="hidden sm:inline font-mono-tech text-[10px] uppercase tracking-[0.2em] text-slate-500 mr-1">
-                {user.email}
-              </span>
-              <button
-                data-testid="nav-logout-button"
-                onClick={logout}
-                className="inline-flex items-center gap-1.5 h-9 px-3 rounded-md border border-[#343A52] hover:border-amber-500/50 hover:text-amber-300 text-xs text-slate-300 transition-colors"
-              >
-                <LogOut className="w-3.5 h-3.5" /> Sign out
-              </button>
-              <Link
-                to="/app"
-                data-testid="nav-launch-app-button"
-                className="inline-flex items-center gap-2 h-9 px-4 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-semibold tracking-tight transition-all shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
-              >
-                Open app <span aria-hidden>→</span>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                data-testid="nav-login-link"
-                className="hidden sm:inline-flex items-center h-9 px-3 rounded-md text-xs text-slate-300 hover:text-amber-300 font-mono-tech uppercase tracking-[0.2em]"
-              >
-                Sign in
-              </Link>
-              <Link
-                to="/app"
-                data-testid="nav-launch-app-button"
-                className="inline-flex items-center gap-2 h-9 px-4 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-semibold tracking-tight transition-all shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
-              >
-                Launch converter <span aria-hidden>→</span>
-              </Link>
-            </>
-          )}
-        </div>
+        <a
+          href="#download"
+          data-testid="nav-download-cta"
+          className="inline-flex items-center gap-2 h-9 px-4 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-semibold tracking-tight transition-all shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
+        >
+          <Download className="w-4 h-4" /> Download
+        </a>
       </div>
     </header>
   );

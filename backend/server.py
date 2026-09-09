@@ -17,6 +17,7 @@ from converter import analyze_preset, build_package_zip
 from rules_data import AE_VERSIONS, RULES
 from samples_data import SAMPLES
 from auth import build_auth_router, ensure_indexes, seed_admin
+from downloads import build_downloads_router
 
 
 ROOT_DIR = Path(__file__).parent
@@ -30,6 +31,7 @@ app = FastAPI(title="Saturn / PresetBridge API")
 app.state.db = db
 api = APIRouter(prefix="/api")
 api.include_router(build_auth_router(db))
+api.include_router(build_downloads_router(db))
 
 
 # ---------- helpers ----------

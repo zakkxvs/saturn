@@ -62,3 +62,17 @@ export const deletePreset = (id) => api.delete(`/presets/${id}`).then((r) => r.d
 
 export const getSettings = () => api.get("/settings").then((r) => r.data);
 export const putSettings = (body) => api.put("/settings", body).then((r) => r.data);
+
+export const getDownloads = () => api.get("/downloads").then((r) => r.data);
+
+export const downloadInstaller = async (osKey) => {
+  const res = await api.get(`/downloads/${osKey}`, { responseType: "blob" });
+  const cd = res.headers["content-disposition"] || "";
+  const m = /filename="?([^";]+)"?/.exec(cd);
+  const filename = m ? m[1] : `Saturn-${osKey}.zip`;
+  const url = window.URL.createObjectURL(res.data);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  a.remove(); window.URL.revokeObjectURL(url);
+  return { filename };
+};

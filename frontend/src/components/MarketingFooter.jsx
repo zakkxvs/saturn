@@ -65,8 +65,9 @@ export default function MarketingFooter() {
           <ul className="space-y-2 text-sm text-slate-400">
             <li><a href="#features" className="hover:text-slate-100">Features</a></li>
             <li><a href="#how-it-works" className="hover:text-slate-100">How it works</a></li>
+            <li><a href="#requirements" className="hover:text-slate-100">Requirements</a></li>
             <li><a href="#pricing" className="hover:text-slate-100">Pricing</a></li>
-            <li><a href="/app" className="hover:text-slate-100">Open converter</a></li>
+            <li><a href="#download" className="hover:text-slate-100">Download</a></li>
           </ul>
         </div>
 
