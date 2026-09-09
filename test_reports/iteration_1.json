@@ -1,0 +1,48 @@
+{
+  "summary": "Tested Saturn/PresetBridge JWT auth (register, login, me, logout, forgot/reset, brute-force lockout) and spot-checked existing core endpoints. Also E2E tested Login page, Register page, MarketingHeader + AppShell user state + logout via Playwright. 17/18 backend tests passed. 1 backend bug: POST /api/auth/reset-password returns 500 due to naive/aware datetime comparison. All frontend flows work as expected.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "POST /api/auth/reset-password",
+        "issue": "TypeError: can't compare offset-naive and offset-aware datetimes at auth.py:230. Reset token roundtrips through Mongo as naive datetime, then compared against datetime.now(timezone.utc). Returns 500 to client. Blocks entire password-reset flow.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Login.jsx / Register.jsx",
+        "issues": ["React warning: 'Cannot update a component (BrowserRouter) while rendering a different component (Login/Register)'. Likely a navigate() call happening during render instead of inside useEffect. Non-fatal but should be cleaned up."]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_auth_and_core.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Fix reset_password datetime comparison in /app/backend/auth.py line ~230. Either always store expires_at as ISO string and parse to tz-aware, or normalize `exp = exp.replace(tzinfo=timezone.utc) if exp.tzinfo is None else exp` before comparison.",
+    "Fix setState-during-render warning on Login and Register pages (wrap navigate() in useEffect that watches auth state)."
+  ],
+  "critical_code_review_comments": [
+    "auth.py reset_password: naive datetime from Mongo vs tz-aware now — 500 error. Bug.",
+    "auth.py forgot_password / reset_password use `body: dict` instead of a Pydantic model — no validation; email/password not typed. Minor code quality.",
+    "auth.py get_current_user reads token from Authorization header OR access_token cookie, but frontend uses only localStorage bearer; cookie path is untested and not documented.",
+    "seed_admin() correctly re-hashes when .env password changes (verified by successful admin login).",
+    "Brute-force lockout uses ip+email identifier; behind a reverse proxy request.client.host may always be the proxy IP — acceptable but note it locks all users sharing that IP for the same email."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_auth_and_core.py (new)"
+  ],
+  "success_rate": {"backend": "94% (17/18)", "frontend": "100% (all flows tested passed)"},
+  "test_credentials": "admin@saturn.dev / Saturn2026! (seeded, verified). Registered several throwaway users e2e-*@studio.com during testing.",
+  "seed_data_creation": "None persistent; ephemeral test users only. Login-attempts records for lock-*@studio.com left in DB (expire naturally in 15 min).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend admin seed and JWT flow all working. Only remaining backend bug is the reset-password 500. After the fix, re-run pytest /app/backend/tests/test_auth_and_core.py — the test parses the reset link from /var/log/supervisor/backend.err.log automatically. Frontend Login/Register/nav/appshell auth UI all confirmed with data-testids.",
+  "rca of the issue": "reset_password: `expires_at` was stored as a Python datetime (tz-aware) via insert_one; Motor/pymongo drops tzinfo on BSON encode -> retrieved as naive datetime. Line 224-230 only converts string values via fromisoformat; datetime values pass through as naive and then `exp < datetime.now(timezone.utc)` raises TypeError. Fix: normalize `if isinstance(exp, datetime) and exp.tzinfo is None: exp = exp.replace(tzinfo=timezone.utc)` after the isoformat branch, or store expires_at as ISO string on insert."
+}

@@ -1,0 +1,98 @@
+{
+  "project_name": "Saturn / PresetBridge",
+  "app_type": "hybrid_fullstack",
+  "design_archetype": "The Performance Pro / Editorial Technical Precision (Adobe Pro Tool Aesthetic)",
+  "emotional_tone": "Precise, reliable, technical, industrial, authoritative, frictionless",
+  "theme": "Dark Mode Default (Deep Obsidian #090A0F, Graphite Slate #12151E, Kinetic Amber Accent #F59E0B / Solar Flame #FF6B00)",
+  "typography": {
+    "heading_font": "Outfit, Cabinet Grotesk, sans-serif",
+    "body_font": "Manrope, Plus Jakarta Sans, sans-serif",
+    "code_font": "JetBrains Mono, Fira Code, monospace",
+    "font_loading_instructions": "Import Outfit, Manrope, and JetBrains Mono from Google Fonts in index.html or index.css (@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap');)",
+    "hierarchy": {
+      "hero_h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08]",
+      "section_h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "card_h3": "text-xl sm:text-2xl font-semibold tracking-tight",
+      "sub_heading": "text-base sm:text-lg font-medium text-slate-400 leading-relaxed",
+      "body": "text-sm sm:text-base font-normal text-slate-300 leading-relaxed",
+      "code_mono": "font-mono text-xs sm:text-sm text-amber-400 bg-slate-950/80 px-2 py-1 rounded border border-slate-800",
+      "overline_label": "text-xs font-mono font-bold uppercase tracking-[0.2em] text-amber-500"
+    }
+  },
+  "colors": {
+    "background_main": "#08090D",
+    "background_card": "#10121A",
+    "background_card_hover": "#171A26",
+    "background_subtle": "#1A1D2B",
+    "border_color": "#232738",
+    "border_highlight": "#343A52",
+    "text_primary": "#F1F5F9",
+    "text_secondary": "#94A3B8",
+    "text_muted": "#64748B",
+    "accent_primary": "#F59E0B",
+    "accent_primary_hover": "#D97706",
+    "accent_glow": "rgba(245, 158, 11, 0.15)",
+    "accent_kinetic": "#FF6B00",
+    "success": "#10B981",
+    "warning_flag": "#F59E0B",
+    "fallback_info": "#3B82F6",
+    "error_todo": "#EF4444",
+    "badge_bg": "rgba(245, 158, 11, 0.1)",
+    "badge_text": "#FBBF24"
+  },
+  "surfaces_and_effects": {
+    "glassmorphism": "backdrop-blur-xl bg-[#08090D]/80 border border-[#232738] shadow-2xl",
+    "card_style": "bg-[#10121A] border border-[#232738] rounded-xl hover:border-[#343A52] transition-all duration-200 shadow-lg",
+    "active_panel": "bg-[#141722] border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.08)]",
+    "glow_button": "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all transform hover:-translate-y-0.5",
+    "code_editor_surface": "bg-[#0A0C12] border border-[#232738] font-mono text-sm text-slate-200 rounded-lg p-4 overflow-x-auto"
+  },
+  "image_urls": {
+    "hero_background_abstract": "https://images.unsplash.com/photo-1622737133809-d95047b9e673?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "ae_timeline_ui": "https://images.unsplash.com/photo-1658953229625-aad99d7603b4?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "audio_waveform_motion": "https://images.unsplash.com/photo-1720962158858-5fb16991d2b8?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "editor_workspace": "https://images.unsplash.com/photo-1720962158813-29b66b8e23e1?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "abstract_geometry": "https://images.unsplash.com/photo-1709626011485-6fe000ea2dbc?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "layout_and_navigation": {
+    "marketing_header": "Sticky glassmorphism header with logo ('Saturn'), links (Features, How it Works, Pricing, FAQ), and CTA button ('Launch Converter') routing to /app with data-testid='nav-launch-app-button'",
+    "marketing_footer": "High density technical footer with newsletter subscription, quick links, AE version support list, and copyright notice",
+    "app_shell": "Sidebar navigation + Top status bar + Main panel architecture",
+    "app_sidebar_items": [
+      { "name": "Converter", "path": "/app", "icon": "Layers", "testid": "sidebar-converter-link" },
+      { "name": "Preset Library", "path": "/app/library", "icon": "Grid", "testid": "sidebar-library-link" },
+      { "name": "Conversion History", "path": "/app/history", "icon": "Clock", "testid": "sidebar-history-link" },
+      { "name": "Rules Inspector", "path": "/app/rules", "icon": "FileCode", "testid": "sidebar-rules-link" },
+      { "name": "Settings", "path": "/app/settings", "icon": "Sliders", "testid": "sidebar-settings-link" }
+    ],
+    "two_pane_converter": "Left Pane: Drag-and-drop zone (.ffx, .xml, .json, batch) + File info + Target AE version/OS selectors + Safe Conversion toggle + Analyze action button. Right Pane: Live compatibility report drawer (compatible, flagged expressions/effects, fallbacks, manual TODOs) + Package download action button."
+  },
+  "key_components": {
+    "drag_drop_uploader": "Interactive upload dropzone with drag hover glow, file list with badge indicators (.ffx / .xml / .json), batch removal, and sample preset loader buttons ('Load Sample Glow.ffx', 'Load Complex Camera Rig')",
+    "ae_version_target_picker": "Dropdowns for Source AE Version (auto-detected or override CS6-2025), Target AE Version (CS6, CC2014, CC2018, CC2020, 2022, 2024, 2025), and OS Target (macOS / Windows)",
+    "compatibility_report_panel": "Categorized tabs: All (count), Compatible (green check), Flagged (amber warning for missing plugins/expressions), Fallbacks (blue info), Manual TODOs (red fix needed). Includes diff viewer for expressions/keyframes",
+    "package_downloader": "Action card that generates and downloads a zipped compatibility package containing modified preset XML/FFX, compatibility report JSON, and AE version setup script",
+    "first_run_modal": "Setup modal prompting user to select preferred AE versions, default OS, and safe expression fallback mode on first app launch",
+    "preset_library_grid": "Grid of saved/favorite motion presets with search, tag filters (Keyframes, Expressions, Text Animation, Color Grade, Camera), version compatibility badges, and one-click convert/export",
+    "conversion_history_timeline": "Chronological history table/timeline of previous batch conversions with status indicators, execution time, target versions, and re-download links",
+    "rules_panel": "JSON/YAML rule browser showing how Saturn converts expression functions (e.g. linear(), wiggle(), loopOut(), Universal English Expression conversion) across AE versions"
+  },
+  "instructions_to_main_agent": [
+    "Use React + Tailwind CSS + Lucide React icons for the entire frontend (ensure JavaScript .js / .jsx files are used).",
+    "Implement both the Marketing Landing Page ('/') and the Converter SaaS Web App ('/app') inside the React router.",
+    "Make the converter fully functional on the frontend with rich mock analysis algorithms and FastAPI backend integration (/api/convert, /api/presets, /api/rules, /api/history).",
+    "Clear labeling: Ensure UI explicitly states 'Analyzes & generates compatibility package' so users know it provides truthful, precise AE preset migration and expression remapping.",
+    "Provide interactive sample presets (e.g., '3D Camera Shake.ffx', 'Text Typewriter + Wiggle.json', 'Universal Glitch Rig.xml') so users can immediately click and test conversion without uploading their own files.",
+    "Ensure ALL interactive elements (buttons, inputs, links, tabs, cards, modals) have data-testid attributes (e.g. data-testid='preset-upload-dropzone', data-testid='convert-now-button', data-testid='download-package-button').",
+    "Maintain strict design contrast: High contrast text on dark backgrounds, vibrant amber primary buttons, precise 1px borders, crisp JetBrains Mono tags and expression code snippets.",
+    "Include responsive layout adjustments for mobile/tablet while keeping desktop layout as a high-density, dual-pane pro tool workspace."
+  ],
+  "universal_guidelines": [
+    "DO NOT use Inter or Space Grotesk for headings. Use Outfit or Cabinet Grotesk for headings and JetBrains Mono for code.",
+    "DO NOT use full-screen purple gradients on white. Keep a dark obsidian slate aesthetic with amber accents.",
+    "Add generous internal padding (p-6, p-8) inside bordered containers to avoid text colliding with edges.",
+    "Ensure all hover states explicitly define text colors (e.g. hover:bg-amber-500 hover:text-slate-950).",
+    "Ensure all toast notifications use Sonner with dark styled toasts.",
+    "Include data-testid on every interactive button, input, tab, link, and modal."
+  ]
+}
